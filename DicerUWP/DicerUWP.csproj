@@ -142,6 +142,9 @@
     <Compile Include="Controls\RollingBuilderView.xaml.cs">
       <DependentUpon>RollingBuilderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RollingConfigView.xaml.cs">
+      <DependentUpon>RollingConfigView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RollingView.xaml.cs">
       <DependentUpon>RollingView.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\RollingBuilderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RollingConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
