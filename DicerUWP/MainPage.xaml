@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="DicerUWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:DicerUWP.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style x:Key="TitleBlockStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="投骰：" Style="{StaticResource TitleBlockStyle}"/>
+            <TextBlock Text="{x:Bind _viewModel.Result, Mode=OneWay}" Style="{StaticResource TitleBlockStyle}"/>
+        </StackPanel>
+        <ListView x:Name="RollingList" 
+                  CanReorderItems="True" SelectionMode="None"
+                  Grid.Row="2" Grid.Column="0">
+            <controls:RollingBuilderView x:Name="RollingBuilder" NewRollingChecked="RollingBuilderView_NewRollingChecked"/>
+        </ListView>
+    </Grid>
+</Page>
