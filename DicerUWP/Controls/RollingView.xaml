@@ -27,13 +27,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{x:Bind Path=Title}"
-                       FontSize="18"
-                       VerticalAlignment="Center"/>
-            <TextBlock Text="{x:Bind Path=Expression, Mode=OneWay}"
-                       Margin="4,0"
-                       FontSize="18"
-                       VerticalAlignment="Center"/>
             <Button Content="&#xE768;" Background="DarkGreen"
                     Style="{StaticResource IconButtonStyle}"
                     Click="Roll_Click"/>
@@ -70,6 +63,12 @@
             <Button Content="&#xE711;" Background="DarkRed"
                     Style="{StaticResource IconButtonStyle}"
                     Click="Delete_Click"/>
+            <TextBlock Text="{x:Bind Path=Title}"
+                       Margin="4,0" FontSize="18"
+                       VerticalAlignment="Center"/>
+            <TextBlock Text="{x:Bind Path=Expression, Mode=OneWay}"
+                       FontSize="18"
+                       VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>
