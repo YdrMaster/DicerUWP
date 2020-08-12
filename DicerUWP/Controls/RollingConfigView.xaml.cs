@@ -15,7 +15,7 @@ namespace DicerUWP.Controls {
             InitializeComponent();
             _viewModel.PropertyChanged += (_, e) => {
                 if (e.PropertyName == "Expression")
-                    Changed(this, null);
+                    Changed?.Invoke(this, null);
             };
         }
 

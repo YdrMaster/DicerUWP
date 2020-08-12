@@ -1,5 +1,7 @@
 ﻿using DicerUWP.Controls;
 using DicerWinUI.Common;
+using System.Collections.Generic;
+using System.Text;
 using Windows.UI.Xaml.Controls;
 
 namespace DicerUWP {
@@ -8,10 +10,16 @@ namespace DicerUWP {
 
         public MainPage() => InitializeComponent();
 
-        private void RollingBuilderView_NewRollingChecked(object sender, string e) {
+        private void RollingBuilderView_NewRollingChecked(object _, string e) {
             var rollingView = new RollingView(e);
-            rollingView.Play += (object _, string title) => _viewModel.Result = title;
-            rollingView.Delete += (object rolling, System.EventArgs _) => RollingList.Items.Remove(rolling);
+            rollingView.Roll += (object sender, IEnumerable<(string, int)> result) => {
+                if (!(sender is RollingView v)) return;
+                var builder = new StringBuilder();
+                foreach (var (text, num) in result)
+                    builder.Append($"/{text}");
+                _viewModel.Result = $"{v.Title} = {builder.ToString().Substring(1)}";
+            };
+            rollingView.Delete += (object rolling, System.EventArgs ___) => RollingList.Items.Remove(rolling);
             RollingList.Items.Insert(RollingList.Items.Count - 1, rollingView);
         }
 

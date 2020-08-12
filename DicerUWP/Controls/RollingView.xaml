@@ -10,6 +10,11 @@
     d:DesignWidth="400">
 
     <UserControl.Resources>
+        <Style x:Key="FlipButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
         <Style x:Key="IconButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
             <Setter Property="Margin" Value="4"/>
@@ -22,21 +27,43 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{x:Bind Path=_title}"
+            <TextBlock Text="{x:Bind Path=Title}"
                        FontSize="18"
                        VerticalAlignment="Center"/>
-            <TextBlock Text="{x:Bind Path=_viewModel.Expression, Mode=OneWay}"
+            <TextBlock Text="{x:Bind Path=Expression, Mode=OneWay}"
                        Margin="4,0"
                        FontSize="18"
                        VerticalAlignment="Center"/>
             <Button Content="&#xE768;" Background="DarkGreen"
                     Style="{StaticResource IconButtonStyle}"
-                    Click="Play_Click"/>
+                    Click="Roll_Click"/>
             <Button Content="&#xE70F;" Background="DarkGoldenrod"
                     Style="{StaticResource IconButtonStyle}">
                 <Button.Flyout>
                     <Flyout>
-                        <controls:RollingConfigView x:Name="RollingConfig" Changed="RollingChanged"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="&#xE710;" Background="LightGreen" Grid.Column="0" 
+                                    Margin="24,8,4,8" Style="{StaticResource FlipButtonStyle}"
+                                    Click="NewRolling_Click"/>
+                            <Button Content="&#xE74D;" Background="DarkKhaki" Grid.Column="1" 
+                                    Margin="4,8,24,8" Style="{StaticResource FlipButtonStyle}"
+                                    IsEnabled="{x:Bind AllowDeleteRolling, Mode=OneWay}"
+                                    Click="DeleteRolling_Click"/>
+                            <FlipView x:Name="RollingFlip"
+                                      Grid.Row="1"
+                                      Grid.ColumnSpan="2"
+                                      Width="240" Height="384"
+                                      Padding="24,0"
+                                      Background="Transparent"/>
+                        </Grid>
                     </Flyout>
                 </Button.Flyout>
             </Button>
