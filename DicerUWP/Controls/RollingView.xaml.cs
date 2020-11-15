@@ -17,7 +17,7 @@ namespace DicerUWP.Controls {
         private bool AllowDeleteRolling => RollingFlip.Items.Count > 1;
 
         public RollingView(string title) {
-            Title = title;
+            Title = title.Trim();
             InitializeComponent();
             AddRolling();
         }

@@ -29,24 +29,15 @@ namespace DicerUWP.Controls {
             private readonly Random _random = new Random();
 
             private void UpdateExpression() {
-                var builder = new List<string>();
+                var builder = new StringBuilder();
                 for (var i = 0; i < Units.Length; ++i)
                     if (_values[i] != 0)
-                        builder.Add($"{(_values[i] > 0 ? "+" : "")}{_values[i]}{UnitToString(Units[i])}");
-                switch (builder.Count) {
-                    case 0:
-                        Expression = "0";
-                        break;
-                    case 1:
-                        builder.First().Substring(1);
-                        break;
-                    default: {
-                            var result = new StringBuilder();
-                            foreach (var item in builder)
-                                result.Append(item);
-                            Expression = result.ToString().Substring(1);
-                            break;
-                        }
+                        builder.Append($"{(_values[i] > 0 ? "+" : "")}{_values[i]}{UnitToString(Units[i])}");
+                if (builder.Length == 0) 
+                    Expression = "0";
+                else {
+                    builder.Remove(0, 1);
+                    Expression = builder.ToString();
                 }
                 Notify(nameof(Expression));
             }
